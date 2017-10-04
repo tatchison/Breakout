@@ -15,6 +15,7 @@ export default class Paddle{
 			//Both keys are down, so it won't move
 			this.leftDown = false;
 			this.rightDown = false;
+			return;
 		}
 		this.leftDown = left;
 		this.rightDown = right;

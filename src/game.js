@@ -1,11 +1,13 @@
 //game.js
 
 //Questions to ask
-// 1. How should I deal with different sized objects
 // 2. How to deal with ball speed
+// Ans: same update time, different speeds for each
 // 3. How to let paddle motion affect ball angle on collision
+// Ans: create speed/anlge set for ball and adjust 
+// angle: x = h sin thet, y = h cos thet
 // 4. How/where to detect collisions
-// 5. How to remove bricks from board
+// Ans: in the ball object
 
 import Paddle from './paddle';
 import Brick from './brick';
@@ -16,8 +18,15 @@ import Ball from './ball';
 */
 esport default class Game{
 	constructor(){
+		//start in motion
 		this.ball = new Ball();
 		this.bricks = [];
+		//loop to create bricks
+		for(var y = 0; y < 5; y++){
+			for(var x = 0; x < 100; x+10){
+				//make bricks
+			}
+		}
 		this.paddle = new Paddle();
 		this.over = false;
 		this.win = false;
@@ -84,21 +93,11 @@ esport default class Game{
 		*This updates the game world
 	*/
 	update(){
+		this.ball.update(this.paddle, this.bricks);
+		//do something based on ball update return
+		//if ball hits bottom of board, returns out of bounds
+		//check if all bricks are destroyed, if so game ends and you win
 		this.paddle.update(this.left, this.right);
-		//maybe add delay for ball so it moves slower than paddle
-		this.ball.update();
-		var position = this.ball.getPosition();
-		if(position.y > 100){
-			this.over = true;
-			return this.gameOver();
-		}
-		//deal with collision with paddle
-		//remove bricks from board due to collsion
-		if(this.bricks === []){
-			this.over = true;
-			this.win = true;
-			return this.gameOver();
-		}
 		this.bricks.forEach((brick) =>{
 			this.brick.update();
 		});
