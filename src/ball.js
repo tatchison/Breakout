@@ -16,10 +16,16 @@ export default class Ball{
 	constructor(x,y){
 		this.x = x;
 		this.y = y;
-		//angle value
+		//vectors
+		this.vx = 1;
+		this.vy = -1;
 	}
+	//changing angles
+	//paddle moving opposite ball = lower angle, vy++
+	//paddle moving same as ball = steeper angle, vy--
 	update(paddle, bricks){
-		//update position based on angle
+		this.x = this.x + this.vx;
+		this.y = this.y + this.vy;
 		if(this.y > 100) return 'out of bounds';
 		//check for collision with paddle and change direction and angle if so
 		//check for collision with each brick, then destroy brick if so

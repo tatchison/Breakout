@@ -7,6 +7,7 @@ export default class Paddle{
 	constructor(x,y){
 		this.x = x;
 		this.y = y;
+		//add width and height settings
 		this.leftDown = false;
 		this.rightDown = false;
 	}
@@ -19,6 +20,7 @@ export default class Paddle{
 		}
 		this.leftDown = left;
 		this.rightDown = right;
+		//set limitations for movement(doesn't move off screen)
 		if(this.leftDown) this.y--;
 		else if (this.rightDown) this.y++;
 		

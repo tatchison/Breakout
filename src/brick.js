@@ -8,13 +8,14 @@ export default class Brick{
 	constructor(x, y){
 		this.x = x;
 		this.y = y;
+		//add width and height fields
 		this.destroyed = false;
 	}
 	render(context){
-		if(!destroyed){
+		if(!this.destroyed){
 			context.save();
 			context.fillStyle = 'red';
-			context.fillRect(x, y, 10,2);
+			context.fillRect(this.x, this.y, 10,2);
 			context.restore();
 		}
 	}

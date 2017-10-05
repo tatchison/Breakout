@@ -4,29 +4,31 @@
 // 2. How to deal with ball speed
 // Ans: same update time, different speeds for each
 // 3. How to let paddle motion affect ball angle on collision
-// Ans: create speed/anlge set for ball and adjust 
-// angle: x = h sin thet, y = h cos thet
+// Ans: use vector values for angles, reflect values to switch directions
 // 4. How/where to detect collisions
 // Ans: in the ball object
 
+//maybe adjust canvas size so it is wider than height
+
 import Paddle from './paddle';
 import Brick from './brick';
-import Ball from './ball';
+//import Ball from './ball';
 
 /** @class Game
 	*Represents the game board for Breakout
 */
-esport default class Game{
+export default class Game{
 	constructor(){
-		//start in motion
-		this.ball = new Ball();
+		//this.ball = new Ball();
 		this.bricks = [];
 		//loop to create bricks
 		for(var y = 0; y < 5; y++){
 			for(var x = 0; x < 100; x+10){
 				//make bricks
+				this.bricks.push(new Brick(x, y));
 			}
 		}
+		//add initial location for paddle
 		this.paddle = new Paddle();
 		this.over = false;
 		this.win = false;
@@ -50,14 +52,15 @@ esport default class Game{
 		this.handleKeyDown = this.handleKeyDown.bind(this);
 		this.handleKeyUp = this.handleKeyUp.bind(this);
 		//Set up event handlers
-		window.onkeydown = handleKeyDown;
-		window.onkeyup = handleKeyUp;
+		window.onkeydown = this.handleKeyDown;
+		window.onkeyup = this.handleKeyUp;
 		//Start game loop
 		this.interval = setInterval(this.loop,1000);
 	}
 	/** @method gameOver
 		*Handles the end of the game
 	*/
+	//Handle the game over setting
 	gameOver(){
 		
 	}
@@ -93,14 +96,13 @@ esport default class Game{
 		*This updates the game world
 	*/
 	update(){
-		this.ball.update(this.paddle, this.bricks);
+		//this.ball.update(this.paddle, this.bricks);
 		//do something based on ball update return
-		//if ball hits bottom of board, returns out of bounds
-		//check if all bricks are destroyed, if so game ends and you win
 		this.paddle.update(this.left, this.right);
 		this.bricks.forEach((brick) =>{
 			this.brick.update();
 		});
+		//check if all bricks are destroyed, and end game if so
 	}
 	/** @method Render
 		* This draws the game board
