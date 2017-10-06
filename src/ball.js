@@ -66,10 +66,20 @@ export default class Ball{
 				return 'hit';
 			}
 			if((this.vx < 0 && paddle.leftDown === true) || (this.vx > 0 && paddle.rightDown === true)){
-				this.vy++;
+				this.vy+=0.5;
+				if(this.vy === 0) this.vy+=0.5;
+				if(this.vy > 5) this.vy = 5;
+				this.vx-=0.5;
+				if(this.vx === 0) this.vx-=0.5;
+				if(this.vx < -5) this.vx = -5;
 			}
 			else if((this.vx < 0 && paddle.rightDown === true) || (this.vx > 0 && paddle.leftDown === true)){
-				this.vy--;
+				this.vy-=0.5;
+				if(this.vy === 0) this.vy-=0.5;
+				if(this.vy < -5) this.vy = -5;
+				this.vx+=0.5;
+				if(this.vx === 0) this.vx+=0.5;
+				if(this.vx > 4) this.vx = 5;
 			}
 			this.vy = -this.vy;
 			return 'hit';

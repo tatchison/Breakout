@@ -65,10 +65,8 @@ export default class Game{
 		message.textContent = "";
 		document.body.appendChild(message);
 		//Create sound element
-		var sound = document.createElement('audio');
-		sound.id = 'sound'
-		sound.source = 'file:///C:/Users/Owner/Documents/CIS%20580/Breakout/src/Hit_Hurt2.wav';
-		document.body.appendChild(sound);
+		this.sound = document.createElement('audio');
+		this.sound.src = 'Hit_Hurt2.wav';
 		//Bind class functions
 		this.update = this.update.bind(this);
 		this.render = this.render.bind(this);
@@ -133,7 +131,7 @@ export default class Game{
 				return this.gameOver(result);
 			}
 			else if(result === 'hit'){
-				document.getElementById('sound').play();
+				this.sound.play();
 			}
 			//do something based on ball update return
 			this.paddle.update(this.left, this.right);
@@ -142,7 +140,7 @@ export default class Game{
 					var result = this.ball.checkCollision(brick);
 					if (result === 'hit'){
 						brick.destroy();
-						document.getElementById('sound').play();
+						this.sound.play();
 						this.points+=10;
 						var score = document.getElementById('score');
 						score.textContent = 'Score: ' + this.points;
