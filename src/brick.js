@@ -9,17 +9,23 @@ export default class Brick{
 		this.x = x;
 		this.y = y;
 		//add width and height fields
+		this.width = 10;
+		this.height = 4;
 		this.destroyed = false;
+		this.destroy = this.destroy.bind(this);
+	}
+	update(){
+		
 	}
 	render(context){
 		if(!this.destroyed){
 			context.save();
 			context.fillStyle = 'red';
-			context.fillRect(this.x, this.y, 10,2);
+			context.fillRect(this.x, this.y, this.width,this.height);
 			context.restore();
 		}
 	}
-	destroyed(){
-		this.destoyed = true;
+	destroy(){
+		this.destroyed = true;
 	}
 }
